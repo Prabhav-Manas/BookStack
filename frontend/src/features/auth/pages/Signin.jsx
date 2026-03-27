@@ -1,0 +1,96 @@
+import FormInput from "../components/Form-Input";
+import Button from '../components/Button';
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+
+const SignIn=()=>{
+    const {register, handleSubmit, reset, formState:{errors}}=useForm();
+
+    const handleEmailChange = (event) => {
+        let value = event.target.value
+            .replace(/[^a-zA-Z0-9@.]/g, "")   // remove special chars
+            .replace(/\s/g, "");              // remove whitespace
+
+        setValue("email", value, {
+            shouldValidate: true,
+            shouldDirty: true
+        });
+    };
+
+    const onSubmit=(data)=>{
+        console.log('Signin Form Data:=>', data);
+        
+        reset()
+    }
+
+    return(
+        <div className="container">
+            <div className="row">
+                <div className="col-md-4 m-auto my-5 p-4 shadow">
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <div className="d-flex justify-content-between">
+                            <h2 className="">Sign in</h2>
+
+                            {/* User Role Select */}
+                            <select className="form-select w-25">
+                                <option value="user">User</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+
+                        {/* Email */}
+                        <div className="mb-3">
+                            <FormInput 
+                                type="email" 
+                                placeholder="Enter Email" 
+                                label="Email" 
+                                name="email" 
+                                register={register}
+                                rules={{
+                                    required:"Email is required", 
+                                    pattern:{
+                                        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                        message:"Invalid Email"
+                                    }
+                                }}
+                                onchange={handleEmailChange}
+                                error={errors.email}
+                            />
+                        </div>
+
+                        {/* Password */}
+                        <div className="mb-3">
+                            <FormInput 
+                                type="password" 
+                                placeholder="Enter Password" 
+                                label="Password" 
+                                name="password" 
+                                register={register} 
+                                rules={{
+                                    required:"Password is required", 
+                                    pattern:{
+                                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d])[^\s]+$/,
+                                        message: "Invalid Password Pattern"
+                                    }
+                                }}
+                                error={errors.password} 
+                            />
+                        </div>
+
+                        <div className="d-flex justify-content-between mb-3">
+                            <small><Link to="/signup">Don't have account ? Sign up</Link></small>
+                            <small><Link to="">Forgot Password</Link></small>
+                        </div>
+
+                        <div className="d-flex justify-content-end">
+                            <Button type='submit' color="primary" label='Sign in' />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    )
+}
+
+export default SignIn;
