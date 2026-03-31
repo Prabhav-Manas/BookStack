@@ -327,3 +327,23 @@ exports.resetPasswordService=async(data)=>{
 
     return true;
 }
+
+exports.logoutService = async (refreshToken) => {
+    if (!refreshToken) {
+        return true; // logout should still succeed
+    }
+
+    try {
+        const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
+
+        await User.findByIdAndUpdate(decoded.id, {
+            refreshToken: null
+        });
+
+    } catch (error) {
+        // Even if token expired, logout should still succeed
+        return true;
+    }
+
+    return true;
+};

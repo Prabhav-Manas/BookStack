@@ -152,3 +152,32 @@ exports.resetPassword=async(req,res,next)=>{
         next(error);
     }
 }
+
+exports.signout = async (req, res, next) => {
+    try {
+        const refreshToken = req.cookies.refreshToken;
+
+        await authService.logoutService(refreshToken);
+
+        // Clear refresh cookie
+        res.clearCookie('refreshToken', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None'
+        });
+
+        res.status(200).json({
+            status: 200,
+            message: 'Signed out successfully'
+        });
+
+    } catch (error) {
+        // Logout should never fail
+        res.clearCookie('refreshToken');
+
+        res.status(200).json({
+            status: 200,
+            message: 'Signed out successfully'
+        });
+    }
+};
