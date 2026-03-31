@@ -1,6 +1,7 @@
 const express=require('express');
 const bodyParser=require('body-parser');
 const cors=require('cors');
+const cookieParser = require('cookie-parser');
 
 const authRoute=require('./src/modules/auth/auth.routes');
 
@@ -20,6 +21,7 @@ const corsOptions={
 }
 
 // Middlewares
+app.use(cookieParser());
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use(bodyParser.json());

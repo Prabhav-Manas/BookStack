@@ -16,7 +16,7 @@ const userSchema=new mongoose.Schema({
     otpBlockedUntil:{type:Date},
 
     signInAttempts:{type:Number, default:0},
-    signInBloackedUntil:{type:Date},
+    signInBlockedUntil:{type:Date},
 
     passwordHistory:[{type:String}],
 
