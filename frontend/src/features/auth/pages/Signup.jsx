@@ -3,9 +3,11 @@ import Button from "../components/Button"
 import FormInput from "../components/Form-Input"
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useSignup } from "../hooks/useSignup";
 
 const SignUp=()=>{
     const {register, handleSubmit, reset, watch, setValue, formState:{errors}}=useForm({mode:"onChange"});
+    const {signup, error}=useSignup();
 
     // Handle Fullname Input
     const handleFullNameChange=(event)=>{
@@ -38,12 +40,20 @@ const SignUp=()=>{
     const navigate = useNavigate();
 
     // Handle SignUp Form Submit
-    const onSubmit=(data)=>{
-        console.log('SignUp Form Data:=>', data);
+    const onSubmit=async(data)=>{
+        try{
+            const response=await signup({
+                ...data,
+                role:data.role || "user"
+            })
+            console.log('SignUp Form Data:=>', response);
 
-        navigate('/signup');
+            navigate('/');
+            reset();
 
-        reset();
+        }catch(error){
+            console.log('Sign up Error:=>', error);
+        }
     }
 
     return(
@@ -54,11 +64,17 @@ const SignUp=()=>{
                         <div className="d-flex justify-content-between">
                             <h2 className="">Sign up</h2>
 
-                            <select className="form-select w-25" name="" id="">
+                            <select className="form-select w-25" name="" id="" {...register("role")}>
                                 <option value="user">User</option>
                                 <option value="admin">Admin</option>
                             </select>
                         </div>
+
+                        {error && 
+                            <div className="alert alert-danger" role="alert">
+                                {error}
+                            </div>
+                        }
 
                         {/* Fullname */}
                         <div className="mb-3">

@@ -14,20 +14,23 @@ exports.signup=async(req, res, next)=>{
     }
 }
 
-exports.verifyEmail=async(req, res, next)=>{
-    try{
-    const {email, token}=req.params;
+exports.verifyEmail = async (req, res, next) => {
 
-    await authService.verifyEmailService(email, token);
+    try {
 
-    res.status(200).json({
-        status:200,
-        message:'Email verified successfully!'
-    })
-    }catch(error){
+        const { token } = req.params;
+
+        await authService.verifyEmailService(token);
+
+        res.status(200).json({
+            status: 200,
+            message: 'Email verified successfully'
+        });
+
+    } catch (error) {
         next(error);
     }
-}
+};
 
 exports.resendVerificationEmail = async (req, res, next) => {
   try {

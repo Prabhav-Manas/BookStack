@@ -29,7 +29,7 @@ exports.createUserService=async(data)=>{
         fullname, email, password:hashPassword, role:role.toLowerCase(), verificationToken
     });
 
-    const verificationLink=`${process.env.FRONTEND_URL || 'http://localhost:5173'}/auth/verify-email/${email}/${verificationToken}`;
+    const verificationLink=`${process.env.FRONTEND_URL || 'http://localhost:5173'}/auth/verify-email/${verificationToken}`;
 
     const html=`
         <div style="display:block, background-color:lime">
@@ -52,48 +52,61 @@ exports.createUserService=async(data)=>{
 }
 
 // Verify-Email Service
-exports.verifyEmailService=async(email, token)=>{
-    const user=await authRepository.findUserByEmail(email);
+exports.verifyEmailService = async (token) => {
 
-    if(!user){
-        throw catchError(404, 'User not found');
+    const user = await authRepository.findUserByVerificationToken(token);
+
+    if (!user) {
+        // throw catchError(400, 'Invalid or expired verification link');
+            return {
+                message: "Email already verified"
+            };
     }
 
-    if(user.isVerified){
-        throw catchError(400, 'User already verified');
+    if (user.isVerified) {
+        // throw catchError(400, 'Email already verified');
+            return {
+                message: "Email already verified"
+            };
     }
 
-    if(user.verificationToken!==token){
-        throw catchError(400, 'Invalid token!');
-    }
-
-    const verifiedUser=await authRepository.verifyUser(email);
+    const verifiedUser = await authRepository.verifyUser(user._id);
 
     return verifiedUser;
-}
+};
 
 exports.resendVerificationEmailService = async (email) => {
-  const user = await authRepository.findUserByEmail(email);
 
-  if (!user) throw new Error('User not found');
+    const user = await authRepository.findUserByEmail(email);
 
-  if (user.isVerified) throw new Error('Email already verified');
+    if (!user) {
+        throw new Error('User not found');
+    }
 
-  const verificationToken = crypto.randomBytes(32).toString('hex');
+    if (user.isVerified) {
+        throw new Error('Email already verified');
+    }
 
-  await User.findByIdAndUpdate(user._id, { verificationToken, updatedAt: Date.now() });
+    const verificationToken =
+    crypto.randomBytes(32).toString('hex');
 
-  const link = `${process.env.FRONTEND_URL}/auth/verify-email/${email}/${verificationToken}`;
+    await User.findByIdAndUpdate(
+        user._id,
+        { verificationToken }
+    );
 
-  const html = `
-    <h3>Please verify your email:</h3>
-    <a href="${link}" style="padding:10px 15px; background:#0d6efd; color:white; text-decoration:none;">Verify Email</a>
-    <p>This link will expire soon.</p>
-  `;
+    const link =`${process.env.FRONTEND_URL || 'http://localhost:5173'}/auth/verify-email/${verificationToken}`;
 
-  await sendEmail(email, 'Verify Email', html);
+    const html = `
+        <h3>Verify your email</h3>
+        <a href="${link}">
+        Verify Email
+        </a>
+    `;
 
-  return true;
+    await sendEmail(email, 'Verify Email', html);
+
+    return true;
 };
 
 exports.signinService = async (data) => {

@@ -6,7 +6,7 @@ const authMiddleware=require('../../middleware/auth.middleware');
 const router=express.Router();
 
 router.post('/signup', authController.signup);
-router.post('/verify-email/:email/:token', authController.verifyEmail);
+router.get('/verify-email/:token', authController.verifyEmail);
 router.post('/resend-verification', authController.resendVerificationEmail);
 router.post('/signin', authLimiter, authController.signin);
 router.post('/refresh-token', authController.refreshToken);

@@ -2,9 +2,14 @@ import FormInput from "../components/Form-Input";
 import Button from '../components/Button';
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { useSignin } from "../hooks/useSignin";
+import { useNavigate } from "react-router-dom";
 
 const SignIn=()=>{
-    const {register, handleSubmit, reset, formState:{errors}}=useForm();
+    const {register, handleSubmit, setValue, reset, formState:{errors}}=useForm();
+    const {signin, error}=useSignin();
+
+    const navigate=useNavigate();
 
     const handleEmailChange = (event) => {
         let value = event.target.value
@@ -17,8 +22,20 @@ const SignIn=()=>{
         });
     };
 
-    const onSubmit=(data)=>{
-        console.log('Signin Form Data:=>', data);
+    const onSubmit=async(data)=>{
+        try{
+            const response=await signin({
+                ...data,
+                role:data.role
+            });
+            console.log('Signin Form Data:=>', response);
+
+            navigate('/admin/dashboard');
+
+            reset();
+        }catch(error){
+            console.log('Signin Error:=>', error.message || error);
+        }
         
         reset()
     }
@@ -32,11 +49,17 @@ const SignIn=()=>{
                             <h2 className="">Sign in</h2>
 
                             {/* User Role Select */}
-                            <select className="form-select w-25">
+                            <select className="form-select w-25" {...register("role")}>
                                 <option value="user">User</option>
                                 <option value="admin">Admin</option>
                             </select>
                         </div>
+
+                        {error && 
+                            <div className="alert alert-danger" role="alert">
+                                {error}
+                            </div>
+                        }
 
                         {/* Email */}
                         <div className="mb-3">
@@ -53,7 +76,7 @@ const SignIn=()=>{
                                         message:"Invalid Email"
                                     }
                                 }}
-                                onchange={handleEmailChange}
+                                onC hange={handleEmailChange}
                                 error={errors.email}
                             />
                         </div>

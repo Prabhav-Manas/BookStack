@@ -9,8 +9,20 @@ exports.createUser=async(userData)=>{
     return await User.create(userData);
 }
 
-exports.verifyUser=async(email)=>{
-    return User.findOneAndUpdate({email}, {isVerified:true, verificationToken:null}, {returnDocument:'after'});
+// exports.verifyUser=async(email)=>{
+//     return User.findOneAndUpdate({email}, {isVerified:true, verificationToken:null}, {returnDocument:'after'});
+// }
+
+exports.verifyUser = async (userId) => {
+    return await User.findByIdAndUpdate(
+        userId,
+        { isVerified: true, verificationToken: null },
+        { new: true }
+    );
+};
+
+exports.findUserByVerificationToken = async (token) => {
+    return await User.findOne({ verificationToken: token });
 }
 
 exports.saveResetToken=(email, token=null, expiry=null, otp=null, otpExpiry=null)=>{
