@@ -1,0 +1,23 @@
+.admin-dashboard-hero-img {
+    max-height: 400px !important;
+    width: 100%;
+    object-fit: cover;
+}
+
+.admin-dashboard-hero-img {
+    max-height: 400px !important;
+    width: 100%;
+    object-fit: cover;
+}
+
+.admin-dashboard-hero {
+    position: relative;
+}
+
+.admin-dashboard-title {
+    top: 40%;
+    left: 10%;
+    color: #fff;
+    margin: 0;
+    font-family: cursive;
+}

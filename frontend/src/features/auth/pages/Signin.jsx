@@ -1,5 +1,5 @@
 import FormInput from "../components/Form-Input";
-import Button from '../components/Button';
+import Button from '../../../shared/components/Button/Button';
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useSignin } from "../hooks/useSignin";

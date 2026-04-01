@@ -1,0 +1,19 @@
+.card.bgTotalBookscard{
+    background-color: #E3F2FD;
+    color: #0D47A1;
+}
+
+.card.bgTotalUsersCard{
+    background-color: #F3E5F5;
+    color: #4A148C;
+}
+
+.card.bgPendingOrdersCard{
+    background-color: #FFF3E0;
+    color: #E65100;
+}
+
+.card.bgDeliveredOrdersCard{
+    background-color: #E8F5E9;
+    color: #1B5E20;
+}

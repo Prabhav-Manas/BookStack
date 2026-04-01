@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import SignIn from "./features/auth/pages/Signin";
 import SignUp from "./features/auth/pages/Signup";
 import VerifyEmail from './features/auth/pages/VerifyEmail'
-import AdminDashboard from "./features/dashboard/admin/pages/Admindashboard";
+import AdminDashboard from "./features/dashboard/admin/pages/AdminDashboard/AdminDashboard";
 
 function App(){
     return(
