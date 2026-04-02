@@ -2,7 +2,7 @@ import "./Header.css";
 
 const Header=()=>{
     return(
-        <div className="container">
+        <div className="container-fluid">
             <nav className="navbar navbar-expand-lg bgHeaderColor">
                 <div className="container-fluid">
 

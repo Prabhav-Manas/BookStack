@@ -9,8 +9,6 @@ const AdminDashboard=()=>{
     return(
         <div className="container">
             <div className="row">
-                <Header />
-
                 <div className="col-12 mb-5 position-relative admin-dashboard-hero">
                     <img src={AdminDashboardHeroImg} alt="Admin Hero Image" className="admin-dashboard-hero-img img-fluid" />
                     

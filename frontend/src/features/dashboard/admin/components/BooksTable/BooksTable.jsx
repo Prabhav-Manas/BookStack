@@ -3,12 +3,23 @@ import "./BooksTable.css";
 import AtomicHabitsImg from "../../../../../assets/images/Atomic-Habits.jpg";
 import TheAlchemistImg from "../../../../../assets/images/The-Alchemist.jpg";
 import RichDadPoorDadImg from "../../../../../assets/images/Rich-Dad-Poor-dad.jpg";
+import { useNavigate } from "react-router-dom";
 
 const BooksTable = () => {
+    const navigate=useNavigate();
+
+    const onViewAllBooks=()=>{
+        navigate('/admin/bookList');
+    }
+
     return (
         <div className="row gap-3">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h2 className="m-0">Books Table</h2>
+                <div className="d-sm-flex justify-content-between align-items-center gap-5">
+                    <h2 className="">Books Table</h2>
+                    <p className="mt-3 viewAll" onClick={onViewAllBooks}>View All <i className="fa fa-long-arrow-right" aria-hidden="true"></i></p>
+                </div>
+
                 <Button type="button" color="success" 
                 label={
                     <span>
@@ -40,8 +51,8 @@ const BooksTable = () => {
                             <td>
                                 <div className="d-flex flex-wrap gap-2">
                                     <Button type="button" color="info" label="View" />
-                                    <Button type="button" color="primary" label="Edit" />
-                                    <Button type="button" color="danger" label="Delete" />
+                                    {/* <Button type="button" color="primary" label="Edit" />
+                                    <Button type="button" color="danger" label="Delete" /> */}
                                 </div>
                             </td>
                         </tr>
@@ -57,8 +68,8 @@ const BooksTable = () => {
                             <td>
                                 <div className="d-flex flex-wrap gap-2">
                                     <Button type="button" color="info" label="View" />
-                                    <Button type="button" color="primary" label="Edit" />
-                                    <Button type="button" color="danger" label="Delete" />
+                                    {/* <Button type="button" color="primary" label="Edit" />
+                                    <Button type="button" color="danger" label="Delete" /> */}
                                 </div>
                             </td>
                         </tr>
@@ -74,8 +85,8 @@ const BooksTable = () => {
                             <td>
                                 <div className="d-flex flex-wrap gap-2">
                                     <Button type="button" color="info" label="View" />
-                                    <Button type="button" color="primary" label="Edit" />
-                                    <Button type="button" color="danger" label="Delete" />
+                                    {/* <Button type="button" color="primary" label="Edit" />
+                                    <Button type="button" color="danger" label="Delete" /> */}
                                 </div>
                             </td>
                         </tr>
