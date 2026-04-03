@@ -1,4 +1,4 @@
-import FormInput from "../components/Form-Input";
+import FormInput from "../../../shared/components/form-inputs/Form-Input";
 import Button from '../../../shared/components/Button/Button';
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -76,7 +76,7 @@ const SignIn=()=>{
                                         message:"Invalid Email"
                                     }
                                 }}
-                                onC hange={handleEmailChange}
+                                onChange={handleEmailChange}
                                 error={errors.email}
                             />
                         </div>

@@ -4,12 +4,97 @@ import AtomicHabitsImg from "../../../../../assets/images/Atomic-Habits.jpg";
 import TheAlchemistImg from "../../../../../assets/images/The-Alchemist.jpg";
 import RichDadPoorDadImg from "../../../../../assets/images/Rich-Dad-Poor-dad.jpg";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Modal from "../../../../../shared/components/modal/modal";
+import FormInput from "../../../../../shared/components/form-inputs/Form-Input";
+import { useForm } from "react-hook-form";
+import MultiSelect from "../../../../../shared/components/form-inputs/Multi-Select";
 
 const BooksTable = () => {
+    const [isModalOpen, setIsModalOpen]=useState(false);
+    const{register, handleSubmit, reset, setValue, formState:{errors}}=useForm()
+
+    const [imagePreview, setImagePreview] = useState(null);
+
+    const genres = ['Fiction', 'Non-Fiction', 'Science', 'History', 'Biography', 'Technology'];
+    const languages = ['English', 'Hindi', 'Urdu', 'French', 'German'];
+
     const navigate=useNavigate();
 
     const onViewAllBooks=()=>{
         navigate('/admin/bookList');
+    }
+
+    const handleTitleChange=(event)=>{
+        let value=event.target.value
+        .replace(/[^a-zA-Z\s]/g, '')
+        .replace(/^\s+/g, '')
+        .replace(/\s{2,}/g, ' ');
+
+        setValue("title", value, {
+            shouldValidate:true,
+            shouldDirty:true
+        })
+    }
+
+    const handleAuthorChange=(event)=>{
+        let value=event.target.value
+        .replace(/[^a-zA-Z\s]/g, '')
+        .replace(/^\s+/g, '')
+        .replace(/\s{2,}/g, ' ');
+
+        setValue("author", value, {
+            shouldValidate:true,
+            shouldDirty:true
+        })
+    }
+
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            setImagePreview(URL.createObjectURL(file));
+        }
+    }
+
+    const handlePublishedYear = (event) => {
+        let value = event.target.value.replace(/[^0-9]/g, '').slice(0, 4);
+        setValue("publishedYear", value, { shouldValidate: true, shouldDirty: true });
+    }
+
+    const handleISBN = (event) => {
+        let value = event.target.value.replace(/[^0-9-]/g, '');
+        setValue("isbn", value, { shouldValidate: true, shouldDirty: true });
+    }
+
+    const handlePrice = (event) => {
+        let value = event.target.value.replace(/[^0-9.]/g, '');
+        setValue("price", value, { shouldValidate: true, shouldDirty: true });
+    }
+
+    const handleDescription = (event) => {
+        let value = event.target.value.replace(/^\s+/g, '').replace(/\s{2,}/g, ' ');
+        setValue("description", value, { shouldValidate: true, shouldDirty: true });
+    }
+
+    const handleQuantity = (event) => {
+        let value = event.target.value.replace(/[^0-9]/g, '');
+        setValue("quantity", value, { shouldValidate: true, shouldDirty: true });
+    }
+
+    const handlePublisher = (event) => {
+        let value = event.target.value
+            .replace(/[^a-zA-Z\s]/g, '')
+            .replace(/^\s+/g, '')
+            .replace(/\s{2,}/g, ' ');
+        setValue("publisher", value, { shouldValidate: true, shouldDirty: true });
+    }
+
+    const onSubmit=(data)=>{
+        console.log('Add Book:=>', data);
+
+        reset();
+        setImagePreview(null);
+        setIsModalOpen(false);
     }
 
     return (
@@ -26,8 +111,95 @@ const BooksTable = () => {
                         <span style={{ fontSize: '1.5rem', marginRight: '8px', lineHeight: '0' }}>+</span> 
                         Add Book
                     </span>
-                }/>
+                } onClick={()=>setIsModalOpen(true)} />
             </div>
+
+            <Modal title="Add Book" isOpen={isModalOpen} onClose={()=>setIsModalOpen(false)}>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    {/* Book Title */}
+                    <FormInput type="text" label="Title" placeholder="Title" name="title" 
+                    register={register} 
+                    rules={{required:"Book Title is required"}} 
+                    onChange={handleTitleChange} error={errors.title} />
+                    
+                    {/* Author */}
+                    <FormInput label='Author' type="text" placeholder="Author" name="author"
+                    register={register}
+                    rules={{required:"Author name is required"}}
+                    onChange={handleAuthorChange} error={errors.author} />
+
+                    {/* Genere */}
+                    <MultiSelect label="Genre" name="genre" options={genres} register={register}
+                    rules={{ required: "Genre is required" }}
+                    error={errors.genre} />
+
+                    {/* Published Year */}
+                    <FormInput type="text" label="Published Year" placeholder="Published Year" name='publishedYear'
+                    register={register}
+                    rules={{required:"Published Year is required", pattern:{value:/^[0-9]+$/, message:'Invalid pattern'}}}
+                    onChange={handlePublishedYear}
+                    error={errors.publishedYear} />
+
+                    {/* ISBN  */}
+                    <FormInput type="text" label='ISBN' name="isbn" placeholder="ISBN"
+                    register={register}
+                    rules={{require:"ISBN is required"}}
+                    onChange={handleISBN} error={errors.isbn} />
+
+                    {/* Price */}
+                    <FormInput type="text" label="Price" placeholder="Price" name="price"
+                    register={register}
+                    rules={{required:"Price is reuired", pattern:{value:/^[0-9]+$/, message:'Invalid Price'}}}
+                    onChange={handlePrice} error={errors.price} />
+
+                    {/* Description  */}
+                    <FormInput type="text" label="Description" placeholder="Description" name="description"
+                    register={register}
+                    rules={{required:"Description is reuired"}}
+                    onChange={handleDescription} error={errors.description} />
+
+                    {/* Cover Image */}
+                    {/* <img src="" alt="" className="img-fluid" /> */}
+                    {/* 3. File input + preview */}
+                    <div className="mb-4">
+                        <label className="form-label">Cover Image</label>
+                        <input type="file" className="form-control" accept="image/*"
+                            {...register("coverImage", { required: "Cover image is required" })}
+                            onChange={handleImageChange}
+                        />
+                        {errors.coverImage && <small className="text-danger">{errors.coverImage.message}</small>}
+
+                        {/* Only show preview if image is selected */}
+                        {imagePreview && (
+                            <img src={imagePreview} alt="Cover Preview" className="img-fluid mt-2 rounded"
+                                style={{ maxHeight: '150px', objectFit: 'cover' }}
+                            />
+                        )}
+                    </div>
+
+                    {/* Stock/Quantity */}
+                    <FormInput type="text" label="Quantity" placeholder="Quantity" name="quantity"
+                    register={register}
+                    rules={{required:"Quantity is reuired", pattern:{value:/^[0-9]+$/, message:'Invalid Pattern'}}}
+                    onChange={handleQuantity} error={errors.quantity} />
+
+                    {/* Language  */}
+                    <MultiSelect label="Language" name="language" options={languages} register={register}
+                    rules={{ required: "Language is required" }}
+                    error={errors.language} />
+
+                    {/* Publisher  */}
+                    <FormInput type="text" label="Publisher" placeholder="Publisher" name="publisher"
+                    register={register}
+                    rules={{required:"Publisher is reuired"}}
+                    onChange={handlePublisher} error={errors.publisher} />
+
+                    <div className="d-flex justify-content-end gap-2 mt-3">
+                        <Button type="button" label="Cancel" color="danger" onClick={() => setIsModalOpen(false)} />
+                        <Button type="submit" label="Save" color="success" />
+                    </div>
+                </form>
+            </Modal>
 
             <div className="col-12 table-responsive">
                 <table className="table table-bordered table-hover align-middle mb-0">
@@ -51,8 +223,6 @@ const BooksTable = () => {
                             <td>
                                 <div className="d-flex flex-wrap gap-2">
                                     <Button type="button" color="info" label="View" />
-                                    {/* <Button type="button" color="primary" label="Edit" />
-                                    <Button type="button" color="danger" label="Delete" /> */}
                                 </div>
                             </td>
                         </tr>
@@ -68,8 +238,6 @@ const BooksTable = () => {
                             <td>
                                 <div className="d-flex flex-wrap gap-2">
                                     <Button type="button" color="info" label="View" />
-                                    {/* <Button type="button" color="primary" label="Edit" />
-                                    <Button type="button" color="danger" label="Delete" /> */}
                                 </div>
                             </td>
                         </tr>
@@ -85,8 +253,6 @@ const BooksTable = () => {
                             <td>
                                 <div className="d-flex flex-wrap gap-2">
                                     <Button type="button" color="info" label="View" />
-                                    {/* <Button type="button" color="primary" label="Edit" />
-                                    <Button type="button" color="danger" label="Delete" /> */}
                                 </div>
                             </td>
                         </tr>

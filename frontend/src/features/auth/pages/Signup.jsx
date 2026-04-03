@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form"
 import Button from "../../../shared/components/Button/Button"
-import FormInput from "../components/Form-Input"
+import FormInput from "../../../shared/components/form-inputs/Form-Input"
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useSignup } from "../hooks/useSignup";
@@ -80,7 +80,7 @@ const SignUp=()=>{
                         <div className="mb-3">
                             <FormInput type="text" placeholder="Enter your fullname" 
                                 name="fullname" 
-                                label="Fullname" 
+                                label="Fullname"
                                 register={register} 
                                 rules={{required:"Fullname is required"}} 
                                 onChange={handleFullNameChange} error={errors.fullname}

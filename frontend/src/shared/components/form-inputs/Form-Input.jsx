@@ -53,7 +53,7 @@ const FormInput=({label, type, placeholder, register, name, error, rules, onChan
                             }}
                         />
 
-                        {error && <small className="invaild-feedback text-danger position-absolute">{error.message}</small>}
+                        {error && <small className="invalid-feedback text-danger position-absolute">{error.message}</small>}
                     </div>
                 )
             }
