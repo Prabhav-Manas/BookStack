@@ -6,6 +6,8 @@ const FormInput=({label, type, placeholder, register, name, error, rules, onChan
     // Check if type is password
     const isPassword = type === "password";
 
+    const isTextarea = type === "textarea"; 
+
     const registerProps = register(name, rules);
 
     // Toggle Password eye-icon
@@ -17,7 +19,21 @@ const FormInput=({label, type, placeholder, register, name, error, rules, onChan
         <div className="">
             <label className="form-label">{label}</label>
 
-            {isPassword ? (
+            {isTextarea ? (
+                <div>
+                    <textarea
+                        placeholder={placeholder}
+                        className={`form-control ${error ? "is-invalid" : ""}`}
+                        rows={4}
+                        {...registerProps}
+                        onInput={(e) => {
+                            registerProps.onChange(e);
+                            onChange && onChange(e);
+                        }}
+                    />
+                    {error && <small className="text-danger d-block mt-1">{error.message}</small>}
+                </div>
+            ) : isPassword ? (
                 <div className="mb-4 position-relative">
                     <input 
                         type={showPassword ? 'text' : 'password'} 

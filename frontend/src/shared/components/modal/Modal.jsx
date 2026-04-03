@@ -1,9 +1,9 @@
-import { useState } from "react"
-
 const Modal = ({title, children, isOpen, onClose, onSubmit}) =>{
     return (
         <>
-        {isOpen && <div className="modal-backdrop fade show"></div>}
+            {/* Backdrop */}
+            {isOpen && <div className="modal-backdrop fade show"></div>}
+
             <div className={`modal fade ${isOpen ? 'show d-block' : ''}`} tabIndex="-1">
                 <div className="modal-dialog">
                     <div className="modal-content">
@@ -14,10 +14,6 @@ const Modal = ({title, children, isOpen, onClose, onSubmit}) =>{
                         <div className="modal-body">
                             {children}
                         </div>
-                        {/* <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={onClose}>Close</button>
-                            <button type="submit" className="btn btn-primary" onClick={onSubmit}>Save changes</button>
-                        </div> */}
                     </div>
                 </div>
             </div>

@@ -8,6 +8,7 @@ const MultiSelect = ({ label, options, name, register, rules, error }) => {
                     <option key={index} value={option}>{option}</option>
                 ))}
             </select>
+            
             {error && <small className="invalid-feedback text-danger">{error.message}</small>}
         </div>
     )

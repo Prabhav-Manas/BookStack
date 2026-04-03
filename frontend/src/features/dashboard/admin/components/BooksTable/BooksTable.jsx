@@ -185,7 +185,7 @@ const BooksTable = () => {
                     </div>
 
                     {/* Description  */}
-                    <FormInput type="text" label="Description" placeholder="Description" name="description"
+                    <FormInput type="textarea" label="Description" placeholder="Description" name="description"
                     register={register}
                     rules={{required:"Description is reuired"}}
                     onChange={handleDescription} error={errors.description} />
@@ -229,16 +229,16 @@ const BooksTable = () => {
                             error={errors.language} />
                         </div>
                     </div>
-
-
-
+                    
+                    {/* Action Buttons */}
                     <div className="d-flex justify-content-end gap-2 mt-3">
                         <Button type="button" label="Cancel" color="danger" onClick={() => setIsModalOpen(false)} />
                         <Button type="submit" label="Save" color="success" />
                     </div>
                 </form>
             </Modal>
-
+            
+            {/* Books Table */}
             <div className="col-12 table-responsive">
                 <table className="table table-bordered table-hover align-middle mb-0">
                     <thead>
@@ -258,36 +258,6 @@ const BooksTable = () => {
                                 </div>
                             </td>
                             <td>James Clear</td>
-                            <td>
-                                <div className="d-flex flex-wrap gap-2">
-                                    <Button type="button" color="info" label="View" />
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="d-flex align-items-center gap-2">
-                                    <img className="img-fluid rounded" style={{ width: "48px" }} src={TheAlchemistImg} alt="The Alchemist" />
-                                    <span>The Alchemist</span>
-                                </div>
-                            </td>
-                            <td>Paulo Coelho</td>
-                            <td>
-                                <div className="d-flex flex-wrap gap-2">
-                                    <Button type="button" color="info" label="View" />
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="d-flex align-items-center gap-2">
-                                    <img className="img-fluid rounded" style={{ width: "48px" }} src={RichDadPoorDadImg} alt="Rich Dad Poor Dad" />
-                                    <span>Rich Dad Poor Dad</span>
-                                </div>
-                            </td>
-                            <td>Robert T. Kiyosaki</td>
                             <td>
                                 <div className="d-flex flex-wrap gap-2">
                                     <Button type="button" color="info" label="View" />
