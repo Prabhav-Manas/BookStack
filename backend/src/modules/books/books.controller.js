@@ -2,9 +2,9 @@ const booksService=require('../books/books.service');
 
 exports.newBook=async(req, res, next)=>{
     try{
-        // console.log('req.body =>', req.body);
-        // console.log('req.file =>', req.file);
-        // console.log('req.user =>', req.user);
+        console.log('req.body =>', req.body);
+        console.log('req.file =>', req.file);
+        console.log('req.user =>', req.user);
 
         const data={
             ...req.body,
@@ -52,6 +52,42 @@ exports.getBook=async(req, res, next)=>{
             status:200,
             message:'Book fetched!',
             book:book
+        })
+    }catch(error){
+        next(error)
+    }
+}
+
+exports.updateBook=async(req, res, next)=>{
+    try{
+        const {id}=req.params;
+
+        const data={
+            ...req.body,
+            ...req.file && {bookImg:req.file.path} // Only update image if a new one is uploaded
+        }
+
+        const book=await booksService.updateBookService(data, id);
+
+        res.status(200).json({
+            status:200,
+            message:'Book updated!',
+            updatedBook:book
+        })
+    }catch(error){
+        next(error)
+    }
+}
+
+exports.deleteBook=async(req, res, next)=>{
+    try{
+        const {id}=req.params;
+
+        const book=await booksService.deleteBookService(id);
+
+        res.status(200).json({
+            status:200,
+            message:'Book deleted!'
         })
     }catch(error){
         next(error)

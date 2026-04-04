@@ -12,7 +12,7 @@ exports.createBookService=async(data)=>{
 
     if(!data.file) throw createError(400, "Cover image is required");
 
-    const bookImg=data.file.path;
+    const bookImg=data.file.filename;
 
     return await booksRepository.addBook({...data, bookImg, createdBy: userId});
 }
@@ -20,7 +20,7 @@ exports.createBookService=async(data)=>{
 exports.fetchAllBooks=async(userId)=>{
     const allBooks=await booksRepository.getAllBooks(userId);
 
-    if(!allBooks || allBooks.length===0) throw createError(400, 'Books not found!');
+    // if(!allBooks || allBooks.length===0) throw createError(404, 'Books not found!');
 
     return allBooks;
 }
@@ -31,4 +31,20 @@ exports.getSingleBookService=async(bookId)=>{
     if(!book) throw createError(404, 'Book not found');
 
     return book;
+}
+
+exports.updateBookService=async(data, id)=>{
+    const updatedBook=await booksRepository.findByIdAndUpdateBook(data, id);
+
+    if(!updatedBook) throw createError(404, 'Book not found!');
+
+    return updatedBook;
+}
+
+exports.deleteBookService=async(id)=>{
+    const deletedBook=await booksRepository.findBookByIdAndDelete(id);
+
+    if(!deletedBook) throw createError(404, 'Book not found!');
+
+    return deletedBook;
 }

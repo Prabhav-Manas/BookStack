@@ -6,7 +6,11 @@ export const useSignin=()=>{
 
     const signin=async(data)=>{
         try{
-            const response=await signInService(data)
+            const response=await signInService(data);
+
+            if (response.accessToken) {
+                localStorage.setItem('accessToken', response.accessToken);
+            }
 
             return response;
         }catch(error){

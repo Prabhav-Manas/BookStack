@@ -11,3 +11,11 @@ exports.getAllBooks=async(userId)=>{
 exports.findBookById=async(bookId)=>{
     return await Books.findById(bookId);
 }
+
+exports.findByIdAndUpdateBook=async(data, id)=>{
+    return await Books.findByIdAndUpdate(id, {$set: data}, {new:true})
+}
+
+exports.findBookByIdAndDelete=async(id)=>{
+    return await Books.findByIdAndDelete(id);
+}

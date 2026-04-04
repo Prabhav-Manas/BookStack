@@ -22,22 +22,22 @@ const SignIn=()=>{
         });
     };
 
-    const onSubmit=async(data)=>{
-        try{
-            const response=await signin({
-                ...data,
-                role:data.role
-            });
-            console.log('Signin Form Data:=>', response);
+    const onSubmit = async (data) => {
+        try {
+            const response = await signin(data);
+            console.log('Signin Response =>', response);
 
-            navigate('/admin/dashboard');
+            // Navigate based on role
+            if (response.user?.role === 'admin') {
+                navigate('/admin/dashboard');
+            } else {
+                navigate('/dashboard');
+            }
 
             reset();
-        }catch(error){
-            console.log('Signin Error:=>', error.message || error);
+        } catch (error) {
+            console.log('Signin Error =>', error.message || error);
         }
-        
-        reset()
     }
 
     return(

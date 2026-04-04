@@ -1,11 +1,12 @@
 import axios from 'axios';
 import environment from '../../../config/environment';
+import axiosInstance from '../../../config/axiosInstance';
 
 const API_URL=environment.API_URL
 
 export const signUpService=async(data)=>{
     try{
-        const response=await axios.post(`${API_URL}/auth/signup`, data);
+        const response=await axiosInstance.post(`/auth/signup`, data);
 
         return response.data
     }catch(error){
@@ -15,7 +16,7 @@ export const signUpService=async(data)=>{
 
 export const signInService=async(data)=>{
     try{
-        const response =await axios.post(`${API_URL}/auth/signin`, data);
+        const response =await axiosInstance.post(`/auth/signin`, data);
 
         return response.data;
     }catch(error){

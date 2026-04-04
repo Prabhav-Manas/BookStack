@@ -9,10 +9,15 @@ import Modal from "../../../../../shared/components/modal/modal";
 import FormInput from "../../../../../shared/components/form-inputs/Form-Input";
 import { useForm } from "react-hook-form";
 import MultiSelect from "../../../../../shared/components/form-inputs/Multi-Select";
+import { useAddBook } from "../../hooks/useAddBook";
+import { useGetBooks } from "../../hooks/useGetBooks";
 
 const BooksTable = () => {
     const [isModalOpen, setIsModalOpen]=useState(false);
-    const{register, handleSubmit, reset, setValue, formState:{errors}}=useForm()
+    const{register, handleSubmit, reset, setValue, formState:{errors}}=useForm();
+
+    const {addBook, error}=useAddBook();
+    const {books, loading, error:fetchError, getBooks}=useGetBooks();
 
     const [imagePreview, setImagePreview] = useState(null);
 
@@ -94,12 +99,34 @@ const BooksTable = () => {
         setValue("publisher", value, { shouldValidate: true, shouldDirty: true });
     }
 
-    const onSubmit=(data)=>{
-        console.log('Add Book:=>', data);
+    const onSubmit=async(data)=>{
+        try {
+            const formData = new FormData();
 
-        reset();
-        setImagePreview(null);
-        setIsModalOpen(false);
+            formData.append('title', data.title);
+            formData.append('author', data.author);
+            formData.append('publisher', data.publisher);
+            formData.append('genre', data.genre);
+            formData.append('publishYear', data.publishyear);
+            formData.append('price', data.price);
+            formData.append('isbn', data.isbn);
+            formData.append('description', data.description);
+            formData.append('quantity', data.quantity);
+            formData.append('language', data.language);
+            formData.append('coverImage', data.coverImage[0]);
+
+            console.log('publishYear value =>', data.publishyear);
+
+            await addBook(formData);
+
+            await getBooks()
+            
+            reset();
+            setImagePreview(null);
+            setIsModalOpen(false);
+        } catch (error) {
+            console.log('Error in adding new book =>', error);
+        }
     }
 
     return (
@@ -250,20 +277,41 @@ const BooksTable = () => {
                     </thead>
 
                     <tbody>
-                        <tr>
+                        {loading && (
+                            <tr>
+                                <td colSpan="3" className="text-center">Loading...</td>
+                            </tr>
+                        )}
+
+                        {fetchError && (
+                            <tr>
+                                <td colSpan="3" className="text-center text-danger">{fetchError}</td>
+                            </tr>
+                        )}
+
+                        {!loading && !fetchError && books.length === 0 && (
+                            <tr>
+                                <td colSpan="3" className="text-center">No books found</td>
+                            </tr>
+                        )}
+
+                        {!loading && books.slice(0, 2).map((book)=>(
+                        <tr key={book._id}>
                             <td>
                                 <div className="d-flex align-items-center gap-2">
-                                    <img className="img-fluid rounded" style={{ width: "48px" }} src={AtomicHabitsImg} alt="Atomic Habits" />
-                                    <span>Atomic Habits</span>
+                                    <img className="img-fluid rounded" style={{ width: "48px" }} src={`${import.meta.env.VITE_BASE_URL}/images/${book.bookImg}`} alt={book.title} />
+                                    <span>{book.title}</span>
                                 </div>
                             </td>
-                            <td>James Clear</td>
+                            <td>{book.author}</td>
                             <td>
                                 <div className="d-flex flex-wrap gap-2">
-                                    <Button type="button" color="info" label="View" />
+                                    <Button type="button" color="info" label="View" onClick={() => navigate(`/admin/bookDetails/${book._id}`)} />
                                 </div>
                             </td>
                         </tr>
+                        ))}
+
                     </tbody>
                 </table>
             </div>

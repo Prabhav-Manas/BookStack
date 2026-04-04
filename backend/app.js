@@ -30,7 +30,7 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-app.use('/images', express.static(path.join(__dirname, "images")));
+app.use('/images', express.static(path.join(__dirname, "src", "images")));
 
 app.use('/api/auth', authRoute);
 app.use('/api/books', bookRoute);
