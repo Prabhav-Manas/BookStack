@@ -42,6 +42,15 @@ export const verifyOTPService=async(data)=>{
     }
 }
 
+export const resendOTPService = async (data) => {
+    try {
+        const response = await axiosInstance.post(`/auth/resend-otp`, data);
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}
+
 export const resetPasswordService = async (data) => {
     try {
         const response = await axiosInstance.post(`/auth/reset-password/${data.token}`, {
