@@ -48,3 +48,8 @@ exports.deleteBookService=async(id)=>{
 
     return deletedBook;
 }
+
+exports.fetchAllBooksForUsers = async () => {
+    const allBooks = await booksRepository.getAllBooksForUsers();
+    return allBooks;
+}

@@ -93,3 +93,17 @@ exports.deleteBook=async(req, res, next)=>{
         next(error)
     }
 }
+
+exports.getAllBooksForUsers = async (req, res, next) => {
+    try {
+        const books = await booksService.fetchAllBooksForUsers();
+
+        res.status(200).json({
+            status: 200,
+            message: 'All Books Fetched!',
+            books
+        });
+    } catch (error) {
+        next(error);
+    }
+}

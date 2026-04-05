@@ -20,3 +20,6 @@ exports.findBookByIdAndDelete=async(id)=>{
     return await Books.findByIdAndDelete(id);
 }
 
+exports.getAllBooksForUsers = async () => {
+    return await Books.find({}); //return all books - regardless of user role --> For User Dashboard
+}

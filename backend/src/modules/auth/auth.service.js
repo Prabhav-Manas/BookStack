@@ -152,7 +152,7 @@ exports.signinService = async (data) => {
     await User.findByIdAndUpdate(user._id, { signInAttempts: 0, signInBlockedUntil: null });
 
     // Generate JWT token
-    const accessToken = generateAccessToken(user._id);
+    const accessToken = generateAccessToken(user._id, user.role);
     const refreshToken = generateRefreshToken(user._id);
 
     await User.findByIdAndUpdate(user._id, { refreshToken });

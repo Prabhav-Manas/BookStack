@@ -1,27 +1,18 @@
 import { Navigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
+import { useAuth } from "../../../context/AuthContext";
 
 const PublicRoute = ({ children }) => {
-    const token = localStorage.getItem('accessToken');
+    const { isAuthenticated, user, loading } = useAuth();
 
-    if (!token) return children;
+    if (loading) return <div className="text-center mt-5">Loading...</div>;
 
-    try {
-        const decoded = jwtDecode(token);
-        const isExpired = decoded.exp * 1000 < Date.now();
-
-        // ✅ Token valid — redirect to dashboard
-        if (!isExpired) {
-            return <Navigate to="/admin/dashboard" replace />;
-        }
-
-        // ✅ Token expired — clear and show public page
-        localStorage.removeItem('accessToken');
-        return children;
-    } catch (error) {
-        localStorage.removeItem('accessToken');
-        return children;
+    if (isAuthenticated) {
+        // Redirect to correct dashboard based on role
+        if (user?.role === 'admin') return <Navigate to="/admin/dashboard" replace />;
+        return <Navigate to="/user/dashboard" replace />;
     }
+
+    return children;
 }
 
 export default PublicRoute;

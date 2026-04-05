@@ -67,3 +67,12 @@ export const fetchTotalUsersService = async () => {
         throw error.response?.data || error.message;
     }
 }
+
+export const fetchAllBooksForUsersService = async () => {
+    try {
+        const response = await axiosInstance.get('/books/all');
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}

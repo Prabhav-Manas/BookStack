@@ -31,7 +31,7 @@ const SignIn=()=>{
             if (response.user?.role === 'admin') {
                 navigate('/admin/dashboard');
             } else {
-                navigate('/dashboard');
+                navigate('/user/dashboard');
             }
 
             reset();

@@ -9,12 +9,17 @@ import BookDetails from "./features/dashboard/admin/pages/BookDetails.jsx";
 import Header from "./shared/components/Header/Header.jsx";
 import PublicRoute from "./shared/components/route-guards/PublicRoutes.jsx";
 import ProtectedRoute from "./shared/components/route-guards/ProtectedRoutes.jsx";
+import UserDashboard from "./features/dashboard/user/pages/UserDashboard.jsx";
+import {useAuth} from "./context/AuthContext.jsx";
+import AdminRoute from "./shared/components/route-guards/AdminRoute.jsx";
+import UserRoute from "./shared/components/route-guards/UserRoute.jsx";
 
 const AppLayout=()=>{
     const location=useLocation();
+    const { isAuthenticated } = useAuth();
 
     const hideHeaderRoutes=['/auth/signin', '/signup', '/'];
-    const showHeader=!hideHeaderRoutes.includes(location.pathname) && localStorage.getItem('accessToken');
+    const showHeader=!hideHeaderRoutes.includes(location.pathname) && isAuthenticated;
 
     return(
         <div className="">
@@ -28,9 +33,11 @@ const AppLayout=()=>{
                     <Route path="/auth/verify-email/:token" element={<PublicRoute><VerifyEmail /></PublicRoute>} />
 
                     {/* PROTECTED ROUTES */}
-                    <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
-                    <Route path="/admin/bookList" element={<ProtectedRoute><BookList /></ProtectedRoute>} />
-                    <Route path="/admin/bookDetails/:id" element={<ProtectedRoute><BookDetails /></ProtectedRoute>} />
+                    <Route path="/admin/dashboard" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+                    <Route path="/admin/bookList" element={<AdminRoute><BookList /></AdminRoute>} />
+                    <Route path="/admin/bookDetails/:id" element={<AdminRoute><BookDetails /></AdminRoute>} />
+
+                    <Route path="/user/dashboard" element={<UserRoute><UserDashboard /></UserRoute>} />
                     
                     {/* 404 PAGE NOT FOUND */}
                     <Route path="*" element={<Navigate to="/auth/signin" replace />} />
