@@ -58,3 +58,12 @@ export const getBookService = async (id) => {
         throw error.response?.data || error.message;
     }
 }
+
+export const fetchTotalUsersService = async () => {
+    try {
+        const response = await axiosInstance.get('/users/total-users');
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+}

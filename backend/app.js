@@ -4,6 +4,7 @@ const cors=require('cors');
 const cookieParser = require('cookie-parser');
 
 const authRoute=require('./src/modules/auth/auth.routes');
+const userRoute=require('./src/modules/user/user.routes');
 const bookRoute=require('./src/modules/books/books.routes');
 
 const path=require('path');
@@ -33,6 +34,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use('/images', express.static(path.join(__dirname, "src", "images")));
 
 app.use('/api/auth', authRoute);
+app.use('/api/users', userRoute);
 app.use('/api/books', bookRoute);
 
 module.exports=app;

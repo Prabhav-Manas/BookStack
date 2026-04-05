@@ -1,8 +1,5 @@
 import Button from "../../../../../shared/components/Button/Button";
 import "./BooksTable.css";
-import AtomicHabitsImg from "../../../../../assets/images/Atomic-Habits.jpg";
-import TheAlchemistImg from "../../../../../assets/images/The-Alchemist.jpg";
-import RichDadPoorDadImg from "../../../../../assets/images/Rich-Dad-Poor-dad.jpg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Modal from "../../../../../shared/components/modal/modal";
@@ -10,14 +7,12 @@ import FormInput from "../../../../../shared/components/form-inputs/Form-Input";
 import { useForm } from "react-hook-form";
 import MultiSelect from "../../../../../shared/components/form-inputs/Multi-Select";
 import { useAddBook } from "../../hooks/useAddBook";
-import { useGetBooks } from "../../hooks/useGetBooks";
 
-const BooksTable = () => {
+const BooksTable = ({ books, loading, error, getBooks }) => {
     const [isModalOpen, setIsModalOpen]=useState(false);
     const{register, handleSubmit, reset, setValue, formState:{errors}}=useForm();
 
-    const {addBook, error}=useAddBook();
-    const {books, loading, error:fetchError, getBooks}=useGetBooks();
+    const {addBook}=useAddBook();
 
     const [imagePreview, setImagePreview] = useState(null);
 
@@ -283,13 +278,13 @@ const BooksTable = () => {
                             </tr>
                         )}
 
-                        {fetchError && (
+                        {error && (
                             <tr>
-                                <td colSpan="3" className="text-center text-danger">{fetchError}</td>
+                                <td colSpan="3" className="text-center text-danger">{error}</td>
                             </tr>
                         )}
 
-                        {!loading && !fetchError && books.length === 0 && (
+                        {!loading && !error && books.length === 0 && (
                             <tr>
                                 <td colSpan="3" className="text-center">No books found</td>
                             </tr>

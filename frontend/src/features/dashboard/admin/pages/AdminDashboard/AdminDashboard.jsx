@@ -3,9 +3,14 @@ import BooksTable from "../../components/BooksTable/BooksTable";
 import RecentOrder from "../../components/RecentOrder/RecentOrder";
 import AdminDashboardHeroImg from "../../../../../assets/images/admin-hero-image.jpg";
 import "./AdminDashboard.css";
+import {useGetBooks} from "../../hooks/useGetBooks";
+import {useGetTotalUsers} from "../../hooks/useGetTotalUsers";
 import Header from "../../../../../shared/components/Header/Header";
 
 const AdminDashboard=()=>{
+    const { books, loading, error, getBooks } = useGetBooks();
+    const { totalUsers } = useGetTotalUsers();
+
     return(
         <div className="container">
             <div className="row">
@@ -19,16 +24,16 @@ const AdminDashboard=()=>{
                 </div>
 
                 <div className="col-12 mb-5">
-                    <AdminStats />
+                    <AdminStats totalBooks={books.length} totalUsers={totalUsers} />
                 </div>
 
                 <div className="col-12 mb-5">
-                    <BooksTable />
+                    <BooksTable books={books} loading={loading} error={error} getBooks={getBooks} />
                 </div>
 
-                <div className="col-12">
+                {/* <div className="col-12">
                     <RecentOrder />
-                </div>
+                </div> */}
             </div>
         </div>
     )

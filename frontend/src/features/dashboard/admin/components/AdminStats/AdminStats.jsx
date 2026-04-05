@@ -1,7 +1,7 @@
 import Card from "../../../../../shared/components/card/Card";
 import "./AdminStats.css"
 
-const AdminStats = () => {
+const AdminStats = ({ totalBooks, totalUsers }) => {
     return (
         <div className="row g-3">
             <div className="col-12">
@@ -11,19 +11,19 @@ const AdminStats = () => {
             <div className="col-12">
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
                     <div className="col">
-                        <Card title="Total Books" count={128} bgClass="bgTotalBookscard" />
+                        <Card title="Total Books" count={totalBooks} bgClass="bgTotalBookscard" />
                     </div>
 
                     <div className="col">
-                        <Card title="Total Users" count={789} bgClass="bgTotalUsersCard" />
+                        <Card title="Total Users" count={totalUsers} bgClass="bgTotalUsersCard" />
                     </div>
 
                     <div className="col">
-                        <Card title="Processing Orders" count={344} bgClass="bgPendingOrdersCard" />
+                        <Card title="Processing Orders" count={null} bgClass="bgPendingOrdersCard" />
                     </div>
 
                     <div className="col">
-                        <Card title="Delivered Orders" count={978} bgClass="bgDeliveredOrdersCard" />
+                        <Card title="Delivered Orders" count={null} bgClass="bgDeliveredOrdersCard" />
                     </div>
                 </div>
             </div>
