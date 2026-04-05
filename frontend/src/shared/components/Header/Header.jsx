@@ -1,6 +1,20 @@
+import { useNavigate } from "react-router-dom";
 import "./Header.css";
 
 const Header=()=>{
+    const navigate=useNavigate();
+
+    const onViewBooks=()=>{
+        navigate('/admin/bookList')
+    }
+
+
+
+    const onSignOut=()=>{
+        localStorage.removeItem('accessToken');
+        navigate('/');
+    }
+
     return(
         <div className="container-fluid">
             <nav className="navbar navbar-expand-lg bgHeaderColor">
@@ -13,17 +27,17 @@ const Header=()=>{
                     <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
                         <a className="navbar-brand text-white" href="#">Admin Dashboard</a>
 
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <a className="nav-link active text-white" aria-current="page" href="#">Home</a>
+                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li className="nav-item" style={{cursor:'pointer'}}>
+                                <a className="nav-link active text-white" aria-current="page" onClick={onViewBooks} >Books</a>
                             </li>
 
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <a className="nav-link text-white" href="#">Link</a>
-                            </li>
+                            </li> */}
 
-                            <li className="nav-item">
-                                <a className="nav-link disabled text-white" aria-disabled="true">Disabled</a>
+                            <li className="nav-item" style={{cursor:'pointer'}} onClick={onSignOut}>
+                                <a className="nav-link disabled text-white" aria-disabled="true">Sign out</a>
                             </li>
                         </ul>
 
