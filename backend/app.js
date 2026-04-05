@@ -7,6 +7,8 @@ const authRoute=require('./src/modules/auth/auth.routes');
 const userRoute=require('./src/modules/user/user.routes');
 const bookRoute=require('./src/modules/books/books.routes');
 
+const errorMiddleware = require("./src/middleware/error.middleware");
+
 const path=require('path');
 
 const app=express();
@@ -36,5 +38,7 @@ app.use('/images', express.static(path.join(__dirname, "src", "images")));
 app.use('/api/auth', authRoute);
 app.use('/api/users', userRoute);
 app.use('/api/books', bookRoute);
+
+app.use(errorMiddleware);
 
 module.exports=app;

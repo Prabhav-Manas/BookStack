@@ -70,11 +70,12 @@ const SignUp=()=>{
                             </select>
                         </div>
 
-                        {error && 
-                            <div className="alert alert-danger" role="alert">
-                                {error}
+                        {error && (
+                            <div className="alert alert-danger d-flex align-items-center gap-2" role="alert">
+                                <i className="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                <span>{error}</span>
                             </div>
-                        }
+                        )}
 
                         {/* Fullname */}
                         <div className="mb-3">
