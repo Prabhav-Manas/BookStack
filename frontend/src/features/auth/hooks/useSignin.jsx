@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { signInService } from "../services/auth.service";
-import { useAuth } from "../../../context/AuthContext"; // ✅ import
+import { useAuth } from "../../../context/AuthContext";
 
 export const useSignin = () => {
     const [error, setError] = useState();
-    const { login } = useAuth(); // ✅ use login from context
+    const { login } = useAuth();
 
     const signin = async (data) => {
         try {
+            setError(null);
             const response = await signInService(data);
 
             // Use context login instead of manually setting localStorage
@@ -17,7 +18,11 @@ export const useSignin = () => {
 
             return response;
         } catch (error) {
-            setError(error.message || 'Sign in Failed!');
+            const message =
+                error?.message ||
+                error?.error ||
+                'Sign in failed. Please try again.';
+            setError(message);
             throw error;
         }
     }

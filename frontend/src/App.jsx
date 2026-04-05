@@ -13,6 +13,9 @@ import UserDashboard from "./features/dashboard/user/pages/UserDashboard.jsx";
 import {useAuth} from "./context/AuthContext.jsx";
 import AdminRoute from "./shared/components/route-guards/AdminRoute.jsx";
 import UserRoute from "./shared/components/route-guards/UserRoute.jsx";
+import ForgotPassword from "./features/auth/pages/ForgotPassword.jsx";
+import VerifyOTP from "./features/auth/pages/VerifyOTP.jsx";
+import ResetPassword from "./features/auth/pages/ResetPassword.jsx";
 
 const AppLayout=()=>{
     const location=useLocation();
@@ -31,6 +34,9 @@ const AppLayout=()=>{
                     <Route path="/auth/signin" element={<PublicRoute><SignIn /></PublicRoute>} />
                     <Route path="/signup" element={<PublicRoute><SignUp/></PublicRoute>} />
                     <Route path="/auth/verify-email/:token" element={<PublicRoute><VerifyEmail /></PublicRoute>} />
+                    <Route path="/auth/forgot-password" element={<PublicRoute><ForgotPassword /></PublicRoute>} />
+                    <Route path="/auth/verify-otp" element={<PublicRoute><VerifyOTP /></PublicRoute>} />
+                    <Route path="/auth/reset-password/:token" element={<PublicRoute><ResetPassword /></PublicRoute>} />
 
                     {/* PROTECTED ROUTES */}
                     <Route path="/admin/dashboard" element={<AdminRoute><AdminDashboard /></AdminRoute>} />

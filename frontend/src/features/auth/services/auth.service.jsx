@@ -14,12 +14,41 @@ export const signUpService=async(data)=>{
     }
 }
 
-export const signInService=async(data)=>{
-    try{
-        const response =await axiosInstance.post(`/auth/signin`, data);
+export const signInService = async (data) => {
+    try {
+        const response = await axiosInstance.post(`/auth/signin`, data);
+        return response.data;
+    } catch (error) {
+        // throw the full response data object so message is accessible
+        throw error.response?.data || { message: error.message };
+    }
+}
 
+export const forgotPasswordService=async(data)=>{
+    try{
+        const response=await axiosInstance.post(`/auth/forgot-password`, data);
         return response.data;
     }catch(error){
+        throw error.response?.data || error.message;
+    }
+}
+
+export const verifyOTPService=async(data)=>{
+    try{
+        const response=await axiosInstance.post(`/auth/verify-otp`, data);
+        return response.data;
+    }catch(error){
+        throw error.response?.data || error.message;
+    }
+}
+
+export const resetPasswordService = async (data) => {
+    try {
+        const response = await axiosInstance.post(`/auth/reset-password/${data.token}`, {
+            password: data.password  //only send password in body
+        });
+        return response.data;
+    } catch (error) {
         throw error.response?.data || error.message;
     }
 }

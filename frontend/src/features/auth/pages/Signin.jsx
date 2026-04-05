@@ -49,17 +49,18 @@ const SignIn=()=>{
                             <h2 className="">Sign in</h2>
 
                             {/* User Role Select */}
-                            <select className="form-select w-25" {...register("role")}>
+                            {/* <select className="form-select w-25" {...register("role")}>
                                 <option value="user">User</option>
                                 <option value="admin">Admin</option>
-                            </select>
+                            </select> */}
                         </div>
 
-                        {error && 
-                            <div className="alert alert-danger" role="alert">
-                                {error}
+                        {error && (
+                            <div className="alert alert-danger d-flex align-items-center gap-2" role="alert">
+                                <i className="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                <span>{error}</span>
                             </div>
-                        }
+                        )}
 
                         {/* Email */}
                         <div className="mb-3">
@@ -102,7 +103,7 @@ const SignIn=()=>{
 
                         <div className="d-flex justify-content-between mb-3">
                             <small><Link to="/signup">Don't have account ? Sign up</Link></small>
-                            <small><Link to="">Forgot Password</Link></small>
+                            <small><Link to="/auth/forgot-password">Forgot Password</Link></small>
                         </div>
 
                         <div className="d-flex justify-content-end">
