@@ -7,7 +7,7 @@ import { useSignup } from "../hooks/useSignup";
 
 const SignUp=()=>{
     const {register, handleSubmit, reset, watch, setValue, formState:{errors}}=useForm({mode:"onChange"});
-    const {signup, error}=useSignup();
+    const {signup, error, isLoading}=useSignup();
 
     // Handle Fullname Input
     const handleFullNameChange=(event)=>{
@@ -145,7 +145,23 @@ const SignUp=()=>{
                         {/* Actions */}
                         <div className="mb-3 d-flex justify-content-between">
                             <p><Link to="/">Already have account ? Sign in</Link></p>
-                            <Button type="submit" color="primary" label="Sign up"></Button>
+                            {/* <Button type="submit" color="primary" label="Sign up"></Button> */}
+
+                            <Button 
+                                type="submit" 
+                                color="primary" 
+                                label={
+                                    isLoading ? (
+                                        <>
+                                            <span className="spinner-border spinner-border-sm me-2"></span>
+                                            Signing up...
+                                        </>
+                                    ) : (
+                                        "Sign up"
+                                    )
+                                }
+                                disabled={isLoading}
+                            />
                         </div>
                     </form>
                 </div>

@@ -33,6 +33,7 @@ const UserDashboard = () => {
 
             <div className="row gap-3">
                 {!loading && books.map((book) => (
+                    console.log('My Books:=>', book._id),
                     <Card
                         key={book._id}
                         srcImg={`${import.meta.env.VITE_BASE_URL}/images/${book.bookImg}`}
@@ -43,13 +44,13 @@ const UserDashboard = () => {
                         style={{ maxWidth: 300 + 'px' }}
                     >
                         <Button type="button" color="info" label="View"
-                            onClick={() => setIsComingSoonModal(true)} />
+                            onClick={() => navigate("/user/book-review/book._id")} />
                     </Card>
                 ))}
             </div>
 
             {/* Coming Soon Modal */}
-            <Modal
+            {/* <Modal
                 title="Coming Soon"
                 isOpen={isComingSoonModal}
                 onClose={() => setIsComingSoonModal(false)}
@@ -69,7 +70,7 @@ const UserDashboard = () => {
                             onClick={() => setIsComingSoonModal(false)} />
                     </div>
                 </div>
-            </Modal>
+            </Modal> */}
         </div>
     )
 }

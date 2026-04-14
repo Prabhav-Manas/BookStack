@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const SignIn=()=>{
     const {register, handleSubmit, setValue, reset, formState:{errors}}=useForm();
-    const {signin, error}=useSignin();
+    const {signin, error, isLoading}=useSignin();
 
     const navigate=useNavigate();
 
@@ -107,7 +107,22 @@ const SignIn=()=>{
                         </div>
 
                         <div className="d-flex justify-content-end">
-                            <Button type='submit' color="primary" label='Sign in' />
+                            {/* <Button type='submit' color="primary" label='Sign in' /> */}
+                            <Button 
+                                type='submit' 
+                                color="primary" 
+                                label={
+                                    isLoading ? (
+                                        <>
+                                            <span className="spinner-border spinner-border-sm me-2"></span>
+                                            Signing in...
+                                        </>
+                                    ) : (
+                                        "Sign in"
+                                    )
+                                }
+                                disabled={isLoading}
+                            />
                         </div>
                     </form>
                 </div>

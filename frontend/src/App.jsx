@@ -10,6 +10,7 @@ import Header from "./shared/components/Header/Header.jsx";
 import PublicRoute from "./shared/components/route-guards/PublicRoutes.jsx";
 import ProtectedRoute from "./shared/components/route-guards/ProtectedRoutes.jsx";
 import UserDashboard from "./features/dashboard/user/pages/UserDashboard.jsx";
+import BookReview from "./features/dashboard/user/pages/book-review/BookReview.jsx";
 import {useAuth} from "./context/AuthContext.jsx";
 import AdminRoute from "./shared/components/route-guards/AdminRoute.jsx";
 import UserRoute from "./shared/components/route-guards/UserRoute.jsx";
@@ -44,6 +45,7 @@ const AppLayout=()=>{
                     <Route path="/admin/bookDetails/:id" element={<AdminRoute><BookDetails /></AdminRoute>} />
 
                     <Route path="/user/dashboard" element={<UserRoute><UserDashboard /></UserRoute>} />
+                    <Route path="/user/book-review/:id" element={<UserRoute><BookReview /></UserRoute>} />
                     
                     {/* 404 PAGE NOT FOUND */}
                     <Route path="*" element={<Navigate to="/auth/signin" replace />} />
