@@ -44,7 +44,7 @@ const UserDashboard = () => {
                         style={{ maxWidth: 300 + 'px' }}
                     >
                         <Button type="button" color="info" label="View"
-                            onClick={() => navigate("/user/book-review/book._id")} />
+                            onClick={() => navigate(`/user/book-review/${book._id}`)} />
                     </Card>
                 ))}
             </div>

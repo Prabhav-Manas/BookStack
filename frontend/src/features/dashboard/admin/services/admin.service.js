@@ -1,4 +1,3 @@
-// import environment from "../../../../config/environment";
 import axiosInstance from "../../../../config/axiosInstance";
 
 // const API_URL=environment.API_URL;
