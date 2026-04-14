@@ -1,5 +1,6 @@
 const booksService=require('../books/books.service');
 
+// Create Book
 exports.newBook=async(req, res, next)=>{
     try{
         console.log('req.body =>', req.body);
@@ -24,6 +25,7 @@ exports.newBook=async(req, res, next)=>{
     }
 }
 
+// Fetch All Books
 exports.getAllbooks=async(req, res, next)=>{
     try{
         const userId=req.user.id;
@@ -40,6 +42,7 @@ exports.getAllbooks=async(req, res, next)=>{
     }
 }
 
+// Fetch A Single Book
 exports.getBook=async(req, res, next)=>{
     try{
         const bookId=req.params.id;
@@ -58,6 +61,7 @@ exports.getBook=async(req, res, next)=>{
     }
 }
 
+// Update Book
 exports.updateBook=async(req, res, next)=>{
     try{
         const {id}=req.params;
@@ -79,6 +83,7 @@ exports.updateBook=async(req, res, next)=>{
     }
 }
 
+// Delete Book
 exports.deleteBook=async(req, res, next)=>{
     try{
         const {id}=req.params;
@@ -94,6 +99,7 @@ exports.deleteBook=async(req, res, next)=>{
     }
 }
 
+// Fetch All Books For Users
 exports.getAllBooksForUsers = async (req, res, next) => {
     try {
         const books = await booksService.fetchAllBooksForUsers();
