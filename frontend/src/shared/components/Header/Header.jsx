@@ -41,9 +41,9 @@ const Header=()=>{
                                 </span>
                             </li>
 
-                            {/* <li className="nav-item">
-                                <a className="nav-link text-white" href="#">Link</a>
-                            </li> */}
+                            <li className="nav-item">
+                                <a className="nav-link text-white" onClick={()=>navigate("/user/cart")}><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                            </li>
 
                             <li className="nav-item" style={{cursor:'pointer'}} onClick={onSignOut}>
                                 <a className="nav-link disabled text-white" aria-disabled="true">Sign out</a>
