@@ -41,7 +41,7 @@ const Header=()=>{
                                 </span>
                             </li>
 
-                            <li className="nav-item">
+                            <li className="nav-item" style={{cursor:"pointer"}}>
                                 <a className="nav-link text-white" onClick={()=>navigate("/user/cart")}><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
                             </li>
 
