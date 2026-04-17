@@ -17,6 +17,7 @@ import UserRoute from "./shared/components/route-guards/UserRoute.jsx";
 import ForgotPassword from "./features/auth/pages/ForgotPassword.jsx";
 import VerifyOTP from "./features/auth/pages/VerifyOTP.jsx";
 import ResetPassword from "./features/auth/pages/ResetPassword.jsx";
+import Cart from "./features/dashboard/user/pages/shopping-cart/cart.jsx";
 
 const AppLayout=()=>{
     const location=useLocation();
@@ -46,6 +47,7 @@ const AppLayout=()=>{
 
                     <Route path="/user/dashboard" element={<UserRoute><UserDashboard /></UserRoute>} />
                     <Route path="/user/book-review/:id" element={<UserRoute><BookReview /></UserRoute>} />
+                    <Route path="/user/cart" element={<UserRoute><Cart /></UserRoute>} />
                     
                     {/* 404 PAGE NOT FOUND */}
                     <Route path="*" element={<Navigate to="/auth/signin" replace />} />

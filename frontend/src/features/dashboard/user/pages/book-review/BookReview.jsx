@@ -1,10 +1,12 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetSingleBook } from "../../hooks/useGetSingleBook";
 import Button from "../../../../../shared/components/Button/Button";
 
 const BookReview=()=>{
     const {id}=useParams();
     const {singleBook, loading, error}=useGetSingleBook(id);
+
+    const navigate=useNavigate();
 
     if(loading) return <div className="container"><h3 className="">Loading...</h3></div>
     if(error) return <div className=""><p className="">{error}</p></div>
@@ -29,7 +31,7 @@ const BookReview=()=>{
                     <h4><strong>Price: </strong>{singleBook.price}</h4>
 
                     <div className="mt-4 d-md-flex justify-content-around">
-                        <Button type="button" color="primary" label="Add Cart" />
+                        <Button type="button" color="primary" label="Add Cart" onClick={()=>navigate("/user/cart")} />
                         <Button type="button" color="success" label="Buy Now" />
                     </div>
                 </div>
