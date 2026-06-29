@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import FormInput from "../../../shared/components/form-inputs/Form-Input";
-import Button from "../../../shared/components/Button/Button";
-import { useForgotPassword } from "../hooks/useForgotPassword";
+import FormInput from "../../../../shared/components/form-inputs/Form-Input";
+import Button from "../../../../shared/components/Button/Button";
+import { useForgotPassword } from "../../hooks/useForgotPassword";
 
 const ForgotPassword = () => {
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();

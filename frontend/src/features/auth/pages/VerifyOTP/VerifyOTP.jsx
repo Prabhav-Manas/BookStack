@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useVerifyOTP } from "../hooks/useVerifyOTP";
-import { useResendOTP } from "../hooks/useResendOTP";
+import { useVerifyOTP } from "../../hooks/useVerifyOTP";
+import { useResendOTP } from "../../hooks/useResendOTP";
 
 const VerifyOTP = () => {
     const [otp, setOtp] = useState(new Array(6).fill(""));

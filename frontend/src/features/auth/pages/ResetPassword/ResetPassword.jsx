@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom"; // ✅ useParams not useLocation
-import FormInput from "../../../shared/components/form-inputs/Form-Input";
-import Button from "../../../shared/components/Button/Button";
-import { useResetPassword } from "../hooks/useResetPassword";
+import FormInput from "../../../../shared/components/form-inputs/Form-Input";
+import Button from "../../../../shared/components/Button/Button";
+import { useResetPassword } from "../../hooks/useResetPassword";
 
 const ResetPassword = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();

@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
-import SignIn from "./features/auth/pages/Signin";
-import SignUp from "./features/auth/pages/Signup";
-import VerifyEmail from './features/auth/pages/VerifyEmail'
+import SignIn from "./features/auth/pages/Signin/Signin.jsx";
+import SignUp from "./features/auth/pages/Signup/Signup.jsx";
+import VerifyEmail from './features/auth/pages/VerifyEmail/VerifyEmail.jsx'
 import AdminDashboard from "./features/dashboard/admin/pages/AdminDashboard/AdminDashboard";
 import BookList from "./features/dashboard/admin/pages/BookList/BookList.jsx";
 import BookDetails from "./features/dashboard/admin/pages/BookDetails.jsx";
@@ -14,9 +14,9 @@ import BookReview from "./features/dashboard/user/pages/book-review/BookReview.j
 import {useAuth} from "./context/AuthContext.jsx";
 import AdminRoute from "./shared/components/route-guards/AdminRoute.jsx";
 import UserRoute from "./shared/components/route-guards/UserRoute.jsx";
-import ForgotPassword from "./features/auth/pages/ForgotPassword.jsx";
-import VerifyOTP from "./features/auth/pages/VerifyOTP.jsx";
-import ResetPassword from "./features/auth/pages/ResetPassword.jsx";
+import ForgotPassword from "./features/auth/pages/ForgotPassword/ForgotPassword.jsx";
+import VerifyOTP from "./features/auth/pages/VerifyOTP/VerifyOTP.jsx";
+import ResetPassword from "./features/auth/pages/ResetPassword/ResetPassword.jsx";
 import Cart from "./features/dashboard/user/pages/shopping-cart/cart.jsx";
 
 const AppLayout=()=>{

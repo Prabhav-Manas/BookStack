@@ -1,5 +1,5 @@
 import axios from "axios"
-import environment from "../../../config/environment"
+import environment from "../../../../config/environment"
 import { useParams } from "react-router-dom"
 import { useEffect, useRef, useState } from "react";
 

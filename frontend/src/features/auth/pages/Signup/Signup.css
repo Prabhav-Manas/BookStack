@@ -1,0 +1,51 @@
+.auth-image {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Wave */
+.auth-image::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -1px;
+
+    width: 90px;
+    height: 100%;
+
+    background: rgba(255, 255, 255, 0.35);
+
+    /* Glass Effect */
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border-left: 1px solid rgba(255, 255, 255, 0.35);
+
+    /* Soft Shadow */
+    box-shadow: -12px 0 30px rgba(0, 0, 0, 0.08);
+
+    /* Wave Shape */
+    clip-path: path("M0,0 C80,120 80,420 0,540 C80,700 80,980 0,1100 L90,1100 L90,0 Z");
+
+    z-index: 2;
+}
+
+/* Optional Light Glow */
+.auth-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 55px;
+
+    width: 120px;
+    height: 100%;
+
+    background: linear-gradient(
+        to left,
+        rgba(255,255,255,.28),
+        rgba(255,255,255,.10),
+        transparent
+    );
+
+    z-index: 1;
+}
