@@ -1,4 +1,5 @@
-const Cart=()=>{
+const Cart=({props})=>{
+    console.log("Cart Props:=>", props);
     return(
         <div className="container">
             <div className="row">

@@ -14,6 +14,10 @@ const BookReview=()=>{
 
     console.log('Single BookReview:=>', singleBook);
 
+    const handleAddToCart=(singleBook)=>{
+        navigate("/user/cart")
+    }
+
     return(
         <div className="container mt-4">
             <div className="row d-md-flex justify-content-around">
@@ -31,7 +35,7 @@ const BookReview=()=>{
                     <h4><strong>Price: </strong>{singleBook.price}</h4>
 
                     <div className="mt-4 d-md-flex justify-content-around">
-                        <Button type="button" color="primary" label="Add Cart" onClick={()=>navigate("/user/cart")} />
+                        <Button type="button" color="primary" label="Add Cart" singleBook onClick={handleAddToCart} />
                         <Button type="button" color="success" label="Buy Now" />
                     </div>
                 </div>
