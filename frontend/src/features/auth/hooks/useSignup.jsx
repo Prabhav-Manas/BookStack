@@ -2,7 +2,6 @@ import { useState } from "react";
 import { signUpService } from "../services/auth.service";
 
 export const useSignup = () => {
-
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
