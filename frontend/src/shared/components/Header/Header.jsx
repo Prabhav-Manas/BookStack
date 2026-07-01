@@ -47,7 +47,6 @@ const Header=()=>{
                                 <a className="nav-link disabled text-white" aria-disabled="true">Sign out</a>
                             </li>
                         </ul>
-
                     </div>
                 </div>
             </nav>
