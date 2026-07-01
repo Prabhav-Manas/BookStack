@@ -10,8 +10,6 @@ const Header=()=>{
         navigate('/admin/bookList')
     }
 
-
-
     const onSignOut=()=>{
         logout(); // clears everything centrally
         navigate('/');
