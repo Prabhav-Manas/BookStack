@@ -117,7 +117,6 @@ exports.verifyOtp=async(req,res,next)=>{
 
 exports.resendOtp = async (req, res, next) => {
     try {
-
         const { email } = req.body;
 
         await authService.resendOtpService(email);
