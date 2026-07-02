@@ -15,9 +15,7 @@ exports.signup=async(req, res, next)=>{
 }
 
 exports.verifyEmail = async (req, res, next) => {
-
     try {
-
         const { token } = req.params;
 
         await authService.verifyEmailService(token);
