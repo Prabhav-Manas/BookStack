@@ -1,7 +1,6 @@
 import * as yup from "yup";
 
 export const signupSchema = yup.object({
-
     role: yup
         .string()
         .oneOf(["user", "admin"])
