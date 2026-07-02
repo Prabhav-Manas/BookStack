@@ -1,11 +1,11 @@
+import Header from "../../../../../shared/components/Header/Header";
 import AdminStats from "../../components/AdminStats/AdminStats";
 import BooksTable from "../../components/BooksTable/BooksTable";
 import RecentOrder from "../../components/RecentOrder/RecentOrder";
-import AdminDashboardHeroImg from "../../../../../assets/images/admin-hero-image.jpg";
-import "./AdminDashboard.css";
 import {useGetBooks} from "../../hooks/useGetBooks";
 import {useGetTotalUsers} from "../../hooks/useGetTotalUsers";
-import Header from "../../../../../shared/components/Header/Header";
+import AdminDashboardHeroImg from "../../../../../assets/images/admin-hero-image.jpg";
+import "./AdminDashboard.css";
 
 const AdminDashboard=()=>{
     const { books, loading, error, getBooks } = useGetBooks();
