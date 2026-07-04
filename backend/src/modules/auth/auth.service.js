@@ -75,7 +75,6 @@ exports.verifyEmailService = async (token) => {
 };
 
 exports.resendVerificationEmailService = async (email) => {
-
     const user = await authRepository.findUserByEmail(email);
 
     if (!user) {
