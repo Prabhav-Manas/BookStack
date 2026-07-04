@@ -109,6 +109,7 @@ exports.resendVerificationEmailService = async (email) => {
 
 exports.signinService = async (data) => {
     const { email, password } = data;
+    
     if (!email || !password) {
         throw new Error('All fields are required');
     }
