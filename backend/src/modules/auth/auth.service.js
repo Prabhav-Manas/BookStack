@@ -53,7 +53,6 @@ exports.createUserService=async(data)=>{
 
 // Verify-Email Service
 exports.verifyEmailService = async (token) => {
-
     const user = await authRepository.findUserByVerificationToken(token);
 
     if (!user) {
