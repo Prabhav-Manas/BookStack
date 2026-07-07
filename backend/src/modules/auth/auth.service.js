@@ -263,7 +263,6 @@ exports.verifyOtpService = async ({ email, otp }) => {
 };
 
 exports.resendOtpService = async (email) => {
-
     const user = await authRepository.findUserByEmail(email);
 
     if (!user) {
