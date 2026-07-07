@@ -270,11 +270,6 @@ exports.resendOtpService = async (email) => {
         throw new Error('Email not found');
     }
 
-    // Prevent OTP spam
-    // if (user.resetOTPExpiry && user.resetOTPExpiry > Date.now()) {
-    //     throw new Error('OTP already sent. Please wait before requesting again.');
-    // }
-
     const cooldown = 30 * 1000;
 
     if (user.resetOTPRequestedAt && (Date.now() - user.resetOTPRequestedAt < cooldown)) {
