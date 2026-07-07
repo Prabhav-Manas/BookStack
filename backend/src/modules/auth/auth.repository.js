@@ -9,10 +9,6 @@ exports.createUser=async(userData)=>{
     return await User.create(userData);
 }
 
-// exports.verifyUser=async(email)=>{
-//     return User.findOneAndUpdate({email}, {isVerified:true, verificationToken:null}, {returnDocument:'after'});
-// }
-
 exports.verifyUser = async (userId) => {
     return await User.findByIdAndUpdate(
         userId,
