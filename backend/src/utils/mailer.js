@@ -1,4 +1,3 @@
-// src/utils/mailer.js
 const { BrevoClient } = require('@getbrevo/brevo');
 
 const brevo = new BrevoClient({
