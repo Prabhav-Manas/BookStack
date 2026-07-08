@@ -13,7 +13,6 @@ exports.sendEmail = async (to, subject, html) => {
       htmlContent: html,
     });
 
-    console.log('Email sent successfully:', result);
     return result;
   } catch (error) {
     console.error('Send email failed:', error.response?.body || error.message);
