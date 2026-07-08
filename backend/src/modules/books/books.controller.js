@@ -42,10 +42,8 @@ exports.getAllbooks=async(req, res, next)=>{
 exports.getBook=async(req, res, next)=>{
     try{
         const bookId=req.params.id;
-        // console.log('Book:=>', bookId)
 
         const book=await booksService.getSingleBookService(bookId);
-
 
         res.status(200).json({
             status:200,
