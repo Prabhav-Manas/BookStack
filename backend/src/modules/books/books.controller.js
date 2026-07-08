@@ -3,10 +3,6 @@ const booksService=require('../books/books.service');
 // Create Book
 exports.newBook=async(req, res, next)=>{
     try{
-        console.log('req.body =>', req.body);
-        console.log('req.file =>', req.file);
-        console.log('req.user =>', req.user);
-
         const data={
             ...req.body,
             file:req.file,
