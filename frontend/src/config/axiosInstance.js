@@ -1,5 +1,6 @@
 import axios from "axios";
 import environment from "./environment";
+// import environment from "./environment.prod";
 
 const axiosInstance=axios.create({
     baseURL:environment.API_URL

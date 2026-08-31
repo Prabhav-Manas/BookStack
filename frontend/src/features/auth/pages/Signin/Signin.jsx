@@ -57,6 +57,7 @@ const SignIn = () => {
 
         } catch (error) {
             console.log("Signin Error =>", error.message || error);
+            console.log("Signin Error =>", error.message);
         }
     };
 
