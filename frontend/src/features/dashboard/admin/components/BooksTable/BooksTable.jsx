@@ -2,7 +2,7 @@ import Button from "../../../../../shared/components/Button/Button";
 import "./BooksTable.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Modal from "../../../../../shared/components/modal/modal";
+import Modal from "../../../../../shared/components/modal/Modal";
 import FormInput from "../../../../../shared/components/form-inputs/Form-Input";
 import { useForm } from "react-hook-form";
 import MultiSelect from "../../../../../shared/components/form-inputs/Multi-Select";

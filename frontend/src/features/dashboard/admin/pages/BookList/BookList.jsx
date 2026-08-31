@@ -1,6 +1,6 @@
 import Card from "../../../../../shared/components/card/Card";
 import Button from "../../../../../shared/components/Button/Button";
-import Modal from "../../../../../shared/components/modal/modal";
+import Modal from "../../../../../shared/components/modal/Modal";
 import FormInput from "../../../../../shared/components/form-inputs/Form-Input";
 import MultiSelect from "../../../../../shared/components/form-inputs/Multi-Select";
 import { useGetBooks } from "../../hooks/useGetBooks";
