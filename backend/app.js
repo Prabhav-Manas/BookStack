@@ -13,6 +13,8 @@ const path=require('path');
 
 const app=express();
 
+app.set("trust proxy", 1);
+
 const corsOptions={
     origin:['http://localhost:5173', process.env.FRONTEND_URL],
     methods:"GET,POST,HEAD,PUT,PATCH,DELETE,OPTIONS",
