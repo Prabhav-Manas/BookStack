@@ -3,7 +3,8 @@ import environment from "./environment";
 // import environment from "./environment.prod";
 
 const axiosInstance=axios.create({
-    baseURL:environment.API_URL
+    baseURL:environment.API_URL,
+    withCredentials: true
 })
 
 // Request Interceptor — attach token to every outgoing request

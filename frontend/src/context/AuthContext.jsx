@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated(false);
     }, []);
 
-    // ✅ useMemo prevents new object reference on every render
+    // useMemo prevents new object reference on every render
     const value = useMemo(() => ({
         user,
         isAuthenticated,

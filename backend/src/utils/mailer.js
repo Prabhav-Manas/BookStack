@@ -15,7 +15,8 @@ exports.sendEmail = async (to, subject, html) => {
 
     return result;
   } catch (error) {
-    console.error('Send email failed:', error.response?.body || error.message);
+    console.log('Send email failed:', error.response?.body || error.message);
+    console.log('Brevo send failed:', error.statusCode, JSON.stringify(error.body) || error.message);
     throw new Error('Failed to send email');
   }
 };
